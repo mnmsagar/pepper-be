@@ -5,6 +5,10 @@ import { CreateUserDto, LoginUserDto } from './dto/user.dto';
 import { eq } from 'drizzle-orm';
 import * as bcrypt from 'bcrypt';
 import { db } from '../db/connection';
+import jwt from 'jsonwebtoken';
+import { Response } from 'express';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 @Injectable()
 export class UsersService {
@@ -49,9 +53,17 @@ export class UsersService {
       throw new Error('Invalid password');
     }
 
+    const token = jwt.sign(
+      { id: user.id, email: user.email, role: user.type },
+      process.env.JWT_SECRET!,
+      { expiresIn: '7d' },
+    );
+
     const { password, ...userWithoutPassword } = user;
-    return userWithoutPassword;
+    return { user: userWithoutPassword, token };
   }
+
+  async logoutUser(userId: number) {}
 
   async getAllUsers() {
     const allUsers = await db.select().from(users);
