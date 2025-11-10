@@ -15,15 +15,10 @@ export class AuthMiddleware implements NestMiddleware {
     const authHeader = req.headers['authorization'];
     const cookieToken = req.cookies?.token;
 
-    console.log('Headers:', req.headers);
-    console.log('Cookies:', req.cookies);
-
     // 🧠 Step 2: Pick token from either source
     const token = authHeader?.startsWith('Bearer ')
       ? authHeader.split(' ')[1]
       : cookieToken;
-
-    console.log('Extracted Token:', token);
 
     if (!token) {
       throw new UnauthorizedException('No token provided');

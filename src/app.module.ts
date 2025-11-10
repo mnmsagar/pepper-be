@@ -6,6 +6,7 @@ import { PartnerModule } from './partner/partner.module';
 import { AdminModule } from './admin/admin.module';
 import { MemberModule } from './member/member.module';
 import { AuthMiddleware } from './users/auth.middleware';
+import { CoinrulesController } from './partner/coinrules/coinrules.controller';
 @Module({
   imports: [UsersModule, PartnerModule, AdminModule, MemberModule],
   controllers: [AppController],
@@ -13,6 +14,6 @@ import { AuthMiddleware } from './users/auth.middleware';
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(AuthMiddleware).forRoutes('admin', 'partner', 'member'); // ✅ ye sab /users routes protect karega
+    consumer.apply(AuthMiddleware).forRoutes('admin/coinrules'); // ✅ ye sab /users routes protect karega
   }
 }

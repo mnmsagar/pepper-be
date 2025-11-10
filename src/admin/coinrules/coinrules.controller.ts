@@ -13,7 +13,14 @@ export class CoinrulesController {
     @Req() req,
   ) {
     // Logic to retrieve all coin rules
-    const result = await this.coinrulesService.getAllCoinRules(page, limit, req);
+
+    console.log('Requesting user in controller:', req.user); // Example of accessing user info from the request
+
+    const result = await this.coinrulesService.getAllCoinRules(
+      page,
+      limit,
+      req,
+    );
     return {
       message: 'List of all coin rules',
       success: true,
