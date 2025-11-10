@@ -22,6 +22,20 @@
       "when": 1762760655162,
       "tag": "0002_thick_grey_gargoyle",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1762763269727,
+      "tag": "0003_previous_goliath",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1762763314981,
+      "tag": "0004_panoramic_miss_america",
+      "breakpoints": true
     }
   ]
 }

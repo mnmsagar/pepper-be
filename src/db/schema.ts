@@ -60,3 +60,24 @@ export const orders = pgTable('orders', {
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });
+
+export const rewardScheme = pgTable('reward_scheme', {
+  id: serial('id').primaryKey(),
+  userId: integer('user_id')
+    .notNull()
+    .references(() => users.id),
+  name: varchar('name', { length: 256 }).notNull(),
+  category: varchar('category', { length: 256 }).notNull(),
+  description: varchar('description', { length: 512 }).notNull(),
+  conditions: varchar('conditions', { length: 512 }).notNull(),
+  coinReward: integer('coin_reward').notNull(),
+  minimumPurchase: numeric('minimum_purchase', {
+    precision: 10,
+    scale: 2,
+  }).notNull(),
+  startDate: timestamp('start_date').notNull(),
+  endDate: timestamp('end_date').notNull(),
+  maxRedemptions: integer('max_redemptions').notNull(),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+});

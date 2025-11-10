@@ -20,6 +20,7 @@ export class AppModule {
         'admin/coinrules',
         'partner/razorpay/update-order',
         'partner/razorpay/create-order',
+        '/partner/dashboard',
       ); // ✅ ye sab /users routes protect karega
   }
 }
