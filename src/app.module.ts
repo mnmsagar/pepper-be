@@ -14,6 +14,12 @@ import { CoinrulesController } from './partner/coinrules/coinrules.controller';
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(AuthMiddleware).forRoutes('admin/coinrules'); // ✅ ye sab /users routes protect karega
+    consumer
+      .apply(AuthMiddleware)
+      .forRoutes(
+        'admin/coinrules',
+        'partner/razorpay/update-order',
+        'partner/razorpay/create-order',
+      ); // ✅ ye sab /users routes protect karega
   }
 }

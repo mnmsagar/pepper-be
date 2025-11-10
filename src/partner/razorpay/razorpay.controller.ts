@@ -1,4 +1,4 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Req } from '@nestjs/common';
 import { RazorpayService } from './razorpay.service';
 import { CreateOrderDto } from '../dto/createOrder.dto';
 
@@ -8,8 +8,9 @@ export class RazorpayController {
 
   // ✅ Create order route
   @Post('create-order')
-  async createOrder(@Body() dto: CreateOrderDto) {
-    return this.razorpayService.createOrder(dto.amount);
+  async createOrder(@Body() dto: CreateOrderDto, @Req() req: any) {
+    const userId = req.user.id;
+    return this.razorpayService.createOrder(dto.amount, dto.coins, userId);
   }
 
   // ✅ Verify signature route
@@ -24,5 +25,10 @@ export class RazorpayController {
     );
 
     return { success: isValid };
+  }
+  @Post('update-order')
+  async updateOrder(@Body() body: any) {
+    const { razorpayOrderId, razorpayPaymentId } = body;
+    return this.razorpayService.updateOrder(razorpayOrderId, razorpayPaymentId);
   }
 }

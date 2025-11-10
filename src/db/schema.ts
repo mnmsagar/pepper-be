@@ -46,3 +46,17 @@ export const coinrules = pgTable('coinrules', {
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });
+
+export const orders = pgTable('orders', {
+  id: serial('id').primaryKey(),
+  razorpayOrderId: varchar('razorpay_order_id', { length: 256 }).notNull(),
+  razorpayPaymentId: varchar('razorpay_payment_id', { length: 256 }),
+  amount: numeric('amount', { precision: 10, scale: 2 }).notNull(),
+  coins: integer('coins').notNull(),
+  userId: integer('user_id')
+    .notNull()
+    .references(() => users.id),
+  status: varchar('status', { length: 50 }).notNull(),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+});
