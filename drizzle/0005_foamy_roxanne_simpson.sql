@@ -1,0 +1,1 @@
+ALTER TABLE "reward_scheme" ADD COLUMN "is_activated" boolean DEFAULT false NOT NULL;

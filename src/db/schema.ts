@@ -6,6 +6,7 @@ import {
   timestamp,
   numeric,
   integer,
+  boolean
 } from 'drizzle-orm/pg-core';
 import { userTypeEnum, coinTypeEnum } from './schema/enums';
 
@@ -68,6 +69,7 @@ export const rewardScheme = pgTable('reward_scheme', {
     .references(() => users.id),
   name: varchar('name', { length: 256 }).notNull(),
   category: varchar('category', { length: 256 }).notNull(),
+  isActivated: boolean('is_activated').default(false).notNull(),
   description: varchar('description', { length: 512 }).notNull(),
   conditions: varchar('conditions', { length: 512 }).notNull(),
   coinReward: integer('coin_reward').notNull(),
