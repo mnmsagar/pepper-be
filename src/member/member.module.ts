@@ -1,4 +1,7 @@
 import { Module } from '@nestjs/common';
+import { DashboardModule } from './dashboard/dashboard.module';
 
-@Module({})
+@Module({
+  imports: [DashboardModule]
+})
 export class MemberModule {}

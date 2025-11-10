@@ -6,11 +6,11 @@ export class DashboardService {
     return {
       message: 'This is the dashboard data',
       data: {
-        totalCoinsDistributed: 10000,
-        walletBalance: 5000,
-        activeSchemes: 12,
-        totalTransactions: 250,
-        recentTransactions: [
+        currentCoinBalance: 7500,
+        totalCoinsEarned: 15000,
+        totalCoinsRedeemed: 7500,
+        numberOfRedeemedSchemes: 8,
+        transactionHistory: [
           {
             id: 1,
             amount: 100,
@@ -26,18 +26,7 @@ export class DashboardService {
             availableBalance: 4900,
           },
         ],
-        topPerformingSchemes: [
-          {
-            name: 'Scheme A',
-            coinsDistributed: 3000,
-            numberOfUsers: 150,
-          },
-          {
-            name: 'Scheme B',
-            coinsDistributed: 2500,
-            numberOfUsers: 120,
-          },
-        ],
+        recentActivity: [],
       },
     };
   }
