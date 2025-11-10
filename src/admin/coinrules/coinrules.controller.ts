@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Query, Req } from '@nestjs/common';
 import { CreateCoinRuleDto } from '../dto/coinrules.dto';
 import { CoinrulesService } from './coinrules.service';
 
@@ -10,9 +10,10 @@ export class CoinrulesController {
   async findAll(
     @Query('page') page: number = 1,
     @Query('limit') limit: number = 10,
+    @Req() req,
   ) {
     // Logic to retrieve all coin rules
-    const result = await this.coinrulesService.getAllCoinRules(page, limit);
+    const result = await this.coinrulesService.getAllCoinRules(page, limit, req);
     return {
       message: 'List of all coin rules',
       success: true,

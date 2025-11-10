@@ -23,8 +23,9 @@ export class CoinrulesService {
   }
 
   // with pagination chaiye hai
-  async getAllCoinRules(page = 1, limit = 10) {
+  async getAllCoinRules(page = 1, limit = 10, req) {
     const offset = (page - 1) * limit;
+    console.log('Requesting user:', req.user); // Example of accessing user info from the request
 
     // 1️⃣ Fetch paginated data
     const coinRules = await db

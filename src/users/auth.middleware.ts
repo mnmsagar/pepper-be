@@ -5,29 +5,37 @@ import {
 } from '@nestjs/common';
 import * as jwt from 'jsonwebtoken';
 import * as dotenv from 'dotenv';
+
 dotenv.config();
 
 @Injectable()
 export class AuthMiddleware implements NestMiddleware {
   use(req: any, res: any, next: () => void) {
-    // 1️⃣ Token read karo
-    const authHeader = req.headers['authorization'] || req.cookies?.token;
+    // 🧩 Step 1: Read from header or cookie
+    const authHeader = req.headers['authorization'];
+    const cookieToken = req.cookies?.token;
 
-    if (!authHeader) {
+    console.log('Headers:', req.headers);
+    console.log('Cookies:', req.cookies);
+
+    // 🧠 Step 2: Pick token from either source
+    const token = authHeader?.startsWith('Bearer ')
+      ? authHeader.split(' ')[1]
+      : cookieToken;
+
+    console.log('Extracted Token:', token);
+
+    if (!token) {
       throw new UnauthorizedException('No token provided');
     }
 
-    // 2️⃣ Extract token (agar cookie ya bearer se aaya ho)
-    const token = authHeader.startsWith('Bearer ')
-      ? authHeader.split(' ')[1]
-      : authHeader;
-
-    // 3️⃣ Verify token
+    // 🔐 Step 3: Verify JWT
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET!);
-      req.user = decoded; // ✅ attach user data to request
+      req.user = decoded; // attach decoded user to request
       next();
-    } catch (error) {
+    } catch (error: any) {
+      console.error('JWT verification error:', error.message);
       throw new UnauthorizedException('Invalid or expired token');
     }
   }
