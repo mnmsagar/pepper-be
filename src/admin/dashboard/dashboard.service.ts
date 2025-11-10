@@ -10,23 +10,28 @@ export class DashboardService {
         topPerfomingPartners: [],
         totalMembers: {
           thisMonth: 100,
-          lastMonth: 123,
+          value: 123,
+          isPositive : true
         },
         totalPartners: {
           thisMonth: 50,
-          lastMonth: 60,
+          value: 60,
+          isPositive : false
         },
         activeMembers: {
           thisMonth: 36,
-          lastMonth: 15,
+          value: 15,
+          isPositive : true
         },
         coinsInCirculation: {
           thisMonth: 45,
-          lastMonth: 78,
+          value: 78,
+          isPositive : false
         },
         totalTransactions: {
           thisMonth: 78,
-          lastMonth: 96,
+          value: 96,
+          isPositive : false
         },
       },
     };
